@@ -2,16 +2,17 @@ package main
 
 import (
 	"crown/crown"
-	"fmt"
 	"net/http"
 )
 
 func main() {
 	r := crown.New()
 	
-	r.GET("/index", func(w http.ResponseWriter, req *http.Request) {
-		fmt.Fprintf(w, "URL.Path = %q\n", req.URL.Path)
+	r.GET("/", func(c *crown.Context) {
+		c.JSON(http.StatusOK, crown.H{
+			"msg": "context",
+		})
 	})
 
-	r.Run(":8080")
+	r.Run(":8000")
 }
